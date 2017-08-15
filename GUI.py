@@ -86,6 +86,7 @@ class App():
 
         if self.checkhistorigram.get() == 1:
             self.indexselected = self.Lb1.curselection()
+			
             for i in range(len(self.indexselected)):
                 pix = self.Lb1.get(self.indexselected[i]).split()
                 if int(pix[0]) > self.higherpix:
