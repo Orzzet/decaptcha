@@ -4,10 +4,14 @@ from Geticons import *
 from Crack import *
 from Historigram import *
 from tkinter import *
-
+from tkinter.filedialog import askopenfilename
 
 
 class App():
+
+    lowerpix = 1000
+    higherpix = 0
+    filename = ""
 
     def __init__(self, master):
         frame = Frame(master)
@@ -59,23 +63,26 @@ class App():
 
 
     def drawhistorigram(self, master):
-        mostpixels = historigram()
-        self.Lb1 = Listbox(master, selectmode = MULTIPLE)
+        try:
+            self.Lb1.delete(0, END)
+        except:
+            self.Lb1 = Listbox(master, selectmode=MULTIPLE)
+
+        self.filename = askopenfilename()
+        mostpixels = historigram(self.filename)
         for i in range(len(mostpixels)):
-            self.Lb1.insert(i+1, str(mostpixels[i][0])+'  '+str(mostpixels[i][1]) )
+            self.Lb1.insert(i+1, "Pixels: " + str(mostpixels[i][1]) + ', ' + "Value: " +str(mostpixels[i][0]))
             self.Lb1.pack()
 
 
     def geticons(self, master):
-        self.lowerpix = 1000
-        self.higherpix = 0
         if self.checkhistorigram.get() == 1 and self.checkfields.get() == 1:
             self.C1.deselect()
 
         if self.checkfields.get() == 1:
             self.lowerpix = int(self.E1.get())
             self.higherpix = int(self.E2.get())
-            im = geticons(self.lowerpix,self.higherpix, self.CheckVar3.get())
+            im = geticons(self.filename, self.lowerpix,self.higherpix, self.CheckVar3.get())
 
             top = Toplevel()
             capout = Label(top, image = im)
@@ -86,7 +93,7 @@ class App():
 
         if self.checkhistorigram.get() == 1:
             self.indexselected = self.Lb1.curselection()
-			
+
             for i in range(len(self.indexselected)):
                 pix = self.Lb1.get(self.indexselected[i]).split()
                 if int(pix[0]) > self.higherpix:
@@ -94,7 +101,7 @@ class App():
                 if int(pix[0]) < self.lowerpix:
                     self.lowerpix = int(pix[0])
 
-            im = geticons(self.lowerpix,self.higherpix, self.CheckVar3.get())
+            im = geticons(self.filename, self.lowerpix,self.higherpix, self.CheckVar3.get())
 
             top = Toplevel()
             capout = Label(top, image = im)
@@ -104,11 +111,14 @@ class App():
             selectedpix.pack(side = BOTTOM)
 
     def crack(self):
-        sol = Label(self.lf_crack, text = str(solve_image(self.lowerpix, self.higherpix)))
+        lowerpix = int(self.E1.get())
+        higherpix = int(self.E2.get())
+        sol = Label(self.lf_crack, text = str(solve_image(self.filename, lowerpix, higherpix)))
         sol.pack(side = BOTTOM)
 
 
 root = Tk()
+root.title("Decaptcha")
 
 app = App(root)
 

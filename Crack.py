@@ -44,7 +44,7 @@ iconset = ['0','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','
 
 imageset = []
 
-def solve_image(lowerpix, higherpix):
+def solve_image(filename, lowerpix, higherpix):
     for letter in iconset:
         for img in os.listdir('./iconset/%s/'%(letter)):
             temp = []
@@ -53,7 +53,7 @@ def solve_image(lowerpix, higherpix):
             imageset.append({letter:temp})
 
 
-    im = Image.open("captcha.jpg")
+    im = Image.open(filename)
     im2 = Image.new("P",im.size,255)
     im = im.convert("P")
     temp = {}

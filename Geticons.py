@@ -4,9 +4,9 @@ from PIL import Image, ImageTk
 import hashlib
 import time
 
-def geticons(lowerpix = 1, higherpix = 200, test = 1):
+def geticons(filename, lowerpix = 1, higherpix = 200, test = 1):
 
-    im = Image.open("captcha.jpg")
+    im = Image.open(filename)
     im2 = Image.new("P",im.size,255)
     im = im.convert("P")
     temp = {}

@@ -3,15 +3,14 @@ __author__ = 'Dell'
 from PIL import Image
 from operator import itemgetter
 
-im = Image.open("captcha.jpg")
-im = im.convert("P")
-his = im.histogram()
+def historigram(filename):
 
-values = {}
+    values = {}
+    mostpixels = []
 
-mostpixels = []
-
-def historigram():
+    im = Image.open(filename)
+    im = im.convert("P")
+    his = im.histogram()
 
     for i in range(256):
         values[i] = his[i]
