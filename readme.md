@@ -23,7 +23,7 @@ clearly.
 Deselect "test" and click "Get icons". New files containing the letters should have been created. Move the characters
 to the right folder of "iconset" (p.e: move an image containing "a" to the folder /iconset/a).
 
-Click "Crack test" and check if the training to solve that captcha was successful.
+Click "Crack test" and check if the training to solve that captcha was successful. If it was, you are gonna need the lower and upper bound of the histogram in order to crack similar captchas.
 
 ### Cracking
 
