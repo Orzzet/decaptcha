@@ -4,6 +4,8 @@
 
 Get the characters of a simple captcha. You need to train the cracker before.
 
+Ref: http://www.boyter.org/decoding-captchas/
+
 ## Dependencias
 
 * [pillow](https://pypi.python.org/pypi/Pillow/) Fork de PIL para el manejo de imágenes.
